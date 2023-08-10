@@ -7,4 +7,4 @@ data class Wallet(
     @JsonProperty("id") val id: String,
     @JsonProperty("displayValue") override val displayValue: String,
     @JsonProperty("accounts") val accounts: List<WalletAccount>? = null
-) : PaymentInstrument(PaymentInstrumentType.WALLET, displayValue)
+) : PaymentInstrumentData(PaymentInstrumentType.WALLET.name, displayValue)

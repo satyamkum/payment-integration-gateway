@@ -1,9 +1,9 @@
 package com.deliveryhero.paymentgateway.models.requests
 
-import com.deliveryhero.paymentgateway.models.PaymentInstrumentDetails
+import com.deliveryhero.paymentgateway.models.PaymentInstrument
 import com.deliveryhero.paymentgateway.models.enums.OperationType
 
 data class TokenizeRequest(
-    val paymentInstrumentDetails: PaymentInstrumentDetails,
+    val paymentInstrument: PaymentInstrument,
     override val paymentTransactionId: String
 ) : OperationPayload(OperationType.REFUND.name, paymentTransactionId)

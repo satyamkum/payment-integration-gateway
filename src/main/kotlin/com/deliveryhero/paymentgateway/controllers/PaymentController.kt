@@ -53,7 +53,7 @@ class PaymentController {
     )
     fun executePspOperation(
         @RequestBody operationRequest: OperationRequest,
-        @RequestHeader headers: Map<String, String>
+        @RequestHeader headers: Map<String, String> // TODO - add subsidiary as mandatory header param
     ): ResponseEntity<OperationResponse> {
         // TODO
         return ResponseEntity.ok(OperationResponse(type = OperationType.CAPTURE.name))

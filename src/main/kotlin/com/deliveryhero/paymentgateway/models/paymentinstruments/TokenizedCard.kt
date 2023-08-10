@@ -25,5 +25,5 @@ data class TokenizedCard @JvmOverloads constructor(
     val instrumentStatus: String? = null
 ) : Card(
     scheme, operationType, brand, issuer, bin, lastDigits, expiryMonth, expiryYear, holderName,
-    PaymentInstrumentType.TOKENIZED_CARD, displayValue
+    PaymentInstrumentType.TOKENIZED_CARD.name, displayValue
 )

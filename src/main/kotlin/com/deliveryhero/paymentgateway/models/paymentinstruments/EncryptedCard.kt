@@ -18,5 +18,5 @@ data class EncryptedCard(
     val encryptedSecurityCode: String? = null
 ) : Card(
     scheme, operationType, brand, issuer, bin, lastDigits, expiryMonth, expiryYear, holderName,
-    PaymentInstrumentType.ENCRYPTED_CARD, displayValue
+    PaymentInstrumentType.ENCRYPTED_CARD.name, displayValue
 )

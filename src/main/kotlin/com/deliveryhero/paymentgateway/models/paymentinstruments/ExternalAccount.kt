@@ -12,4 +12,4 @@ data class ExternalAccount @JvmOverloads constructor(
     val paymentInstrumentTokenExpiryTime: Date? = null,
     val refreshToken: SecuredString? = null,
     val refreshTokenExpiryTime: Date? = null,
-) : PaymentInstrument(PaymentInstrumentType.EXTERNAL_ACCOUNT, displayValue)
+) : PaymentInstrumentData(PaymentInstrumentType.EXTERNAL_ACCOUNT.name, displayValue)

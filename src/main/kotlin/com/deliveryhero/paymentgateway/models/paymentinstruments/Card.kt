@@ -1,7 +1,6 @@
 package com.deliveryhero.paymentgateway.models.paymentinstruments
 
 import com.deliveryhero.paymentgateway.models.SecuredString
-import com.deliveryhero.paymentgateway.models.enums.PaymentInstrumentType
 
 abstract class Card(
     open val scheme: String?,
@@ -13,6 +12,6 @@ abstract class Card(
     open val expiryMonth: String?,
     open val expiryYear: String?,
     open val holderName: SecuredString?,
-    type: PaymentInstrumentType,
+    type: String,
     displayValue: String
-) : PaymentInstrument(type, displayValue)
+) : PaymentInstrumentData(type, displayValue)

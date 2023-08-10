@@ -9,4 +9,4 @@ data class BankAccount @JvmOverloads constructor(
     val branchCode: String? = null,
     override val displayValue: String,
     val clearingCode: String? = null
-) : PaymentInstrument(PaymentInstrumentType.BANK_ACCOUNT, displayValue)
+) : PaymentInstrumentData(PaymentInstrumentType.BANK_ACCOUNT.name, displayValue)

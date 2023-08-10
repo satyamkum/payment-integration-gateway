@@ -9,4 +9,4 @@ data class GiftCard(
     override val displayValue: String,
     val token: SecuredString? = null,
     val balance: Money? = null
-): PaymentInstrument(PaymentInstrumentType.GIFT_CARD, displayValue)
+): PaymentInstrumentData(PaymentInstrumentType.GIFT_CARD.name, displayValue)

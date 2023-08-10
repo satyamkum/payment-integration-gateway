@@ -18,5 +18,5 @@ data class RawCard(
     val securityCode: SecuredString? = null
 ) : Card(
     scheme, operationType, brand, issuer, bin, lastDigits, expiryMonth, expiryYear, holderName,
-    PaymentInstrumentType.RAW_CARD, displayValue
+    PaymentInstrumentType.RAW_CARD.name, displayValue
 )

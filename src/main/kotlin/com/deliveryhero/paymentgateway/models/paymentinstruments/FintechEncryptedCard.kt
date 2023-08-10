@@ -18,5 +18,5 @@ data class FintechEncryptedCard(
     val sessionId: String
 ) : Card(
     scheme, operationType, brand, issuer, bin, lastDigits, expiryMonth, expiryYear, holderName,
-    PaymentInstrumentType.FINTECH_ENCRYPTED_CARD, displayValue
+    PaymentInstrumentType.FINTECH_ENCRYPTED_CARD.name, displayValue
 )

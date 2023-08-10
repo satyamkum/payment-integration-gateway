@@ -21,5 +21,5 @@ data class EncryptedCardByField(
     val encryptedHolderName: String
 ) : Card(
     scheme, operationType, brand, issuer, bin, lastDigits, expiryMonth, expiryYear, holderName,
-    PaymentInstrumentType.ENCRYPTED_CARD_BY_FIELD, displayValue
+    PaymentInstrumentType.ENCRYPTED_CARD_BY_FIELD.name, displayValue
 )
