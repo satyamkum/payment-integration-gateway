@@ -8,4 +8,4 @@ data class CaptureRequest(
     val paymentToken: String? = null,
     val platformReferenceId: String? = null,
     override val paymentTransactionId: String,
-) : OperationPayload(OperationType.CAPTURE.name, paymentTransactionId)
+) : BaseRequest(paymentTransactionId)

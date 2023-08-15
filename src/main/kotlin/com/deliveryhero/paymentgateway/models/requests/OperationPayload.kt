@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 
-@JsonTypeInfo(
+/*@JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
     property = "type",
@@ -17,8 +17,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
     Type(value = CancelRequest::class, name = "CANCEL"),
     Type(value = TokenizeRequest::class, name = "TOKENIZE"),
     Type(value = GenericOperationRequest::class, name = "*"),
-)
+)*/
 abstract class OperationPayload(
-    override val type: String,
     override val paymentTransactionId: String
-) : BaseRequest(type, paymentTransactionId)
+) : BaseRequest(paymentTransactionId)

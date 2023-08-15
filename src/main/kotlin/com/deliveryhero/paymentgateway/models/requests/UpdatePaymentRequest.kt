@@ -11,6 +11,5 @@ data class UpdatePaymentRequest(
     val status: OperationStatus,
     val rawPspData: RawPspData? = null,
     val error: ErrorResponse? = null,
-    override val type: String,
     override val paymentTransactionId: String
-) : BaseRequest(type, paymentTransactionId)
+) : BaseRequest(paymentTransactionId)

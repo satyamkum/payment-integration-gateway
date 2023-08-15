@@ -1,10 +1,10 @@
 package com.deliveryhero.paymentgateway.controllers
 
 import com.deliveryhero.paymentgateway.controllers.PaymentController.Companion.API_VERSION
-import com.deliveryhero.paymentgateway.controllers.PaymentController.Companion.BASE_PATH_PAYMENTS
-import com.deliveryhero.paymentgateway.models.enums.OperationType
+import com.deliveryhero.paymentgateway.models.requests.AuthorizationRequest
 import com.deliveryhero.paymentgateway.models.requests.OperationRequest
 import com.deliveryhero.paymentgateway.models.responses.OperationResponse
+import com.deliveryhero.paymentgateway.models.responses.ResponseData
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.parameters.RequestBody as ReqBody
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
@@ -19,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(BASE_PATH_PAYMENTS + API_VERSION)
+@RequestMapping(API_VERSION)
 class PaymentController {
 
     @PostMapping(
-        ENDPOINT_PAYMENT_EXECUTE,
+        ENDPOINT_PAYMENT,
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
@@ -51,17 +53,29 @@ class PaymentController {
             content = [Content(schema = Schema(implementation = OperationResponse::class))]
         )]
     )
-    fun executePspOperation(
-        @RequestBody operationRequest: OperationRequest,
+    fun pay(
+        @RequestBody authorizeRequest: AuthorizationRequest,
         @RequestHeader headers: Map<String, String> // TODO - add subsidiary as mandatory header param
     ): ResponseEntity<OperationResponse> {
         // TODO
-        return ResponseEntity.ok(OperationResponse(type = OperationType.CAPTURE.name))
+        return ResponseEntity.ok(OperationResponse(ResponseData()))
+    }
+
+    @GetMapping (
+        ENDPOINT_PAYMENTS_GET_OPERATION,
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun getOperationById(
+        @PathVariable correlationId: String,
+        @RequestHeader headers: Map<String, String>
+    ): ResponseEntity<OperationResponse> {
+        // TODO
+        return ResponseEntity.ok(OperationResponse(ResponseData()))
     }
 
     companion object {
-        internal const val ENDPOINT_PAYMENT_EXECUTE = "/execute"
-        internal const val BASE_PATH_PAYMENTS = "/paymentGateway"
+        internal const val ENDPOINT_PAYMENT = "/payments"
+        internal const val ENDPOINT_PAYMENTS_GET_OPERATION = "/payments/{correlationId}"
         internal const val API_VERSION = "/v1"
     }
 }

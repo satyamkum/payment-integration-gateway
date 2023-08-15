@@ -6,4 +6,4 @@ import com.deliveryhero.paymentgateway.models.enums.OperationType
 data class TokenizeRequest(
     val paymentInstrument: PaymentInstrument,
     override val paymentTransactionId: String
-) : OperationPayload(OperationType.REFUND.name, paymentTransactionId)
+) : BaseRequest(paymentTransactionId)
