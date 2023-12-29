@@ -1,15 +1,14 @@
-package com.deliveryhero.paymentgateway.models.requests
+package com.deliveryhero.paymentgateway.models.responses
 
 import com.deliveryhero.paymentgateway.models.ErrorResponse
 import com.deliveryhero.paymentgateway.models.RawPspData
 import com.deliveryhero.paymentgateway.models.enums.OperationStatus
 
-
-data class UpdatePaymentRequest(
-    val correlationId: String? = null,
+data class PspOperationResponseData(
+    val operationType: String,
     val gateway: String? = null,
     val status: OperationStatus,
     val rawPspData: RawPspData? = null,
-    val error: ErrorResponse? = null,
-    override val paymentTransactionId: String
-) : BaseRequest(paymentTransactionId)
+    val pspReferenceId: String? = null,
+    val error: ErrorResponse? = null
+)
