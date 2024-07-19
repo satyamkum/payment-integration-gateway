@@ -14,4 +14,6 @@ data class PaymentInstrumentResponseDetails(
 	val alias: String? = null,
 	val expireAt: String? = null,
 	val scheme: String? = null,
+	val paymentProvider: String? = null,
+	val channelName: String? = null,
 ) : Serializable
