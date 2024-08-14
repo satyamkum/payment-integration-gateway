@@ -7,6 +7,7 @@ import java.io.Serializable
  */
 data class PaymentInstrumentDetailsResponseData(
 	val id: String,
+	val externalId: String? = null,
 	val globalEntityId: String,
 	val paymentMethodName: String,
 	val isPermanent: Boolean,

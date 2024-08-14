@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import lombok.extern.slf4j.Slf4j
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -64,15 +65,42 @@ class PaymentController {
     fun getPaymentInstrument(
         @PathVariable paymentInstrumentId: String,
         @RequestHeader headers: Map<String, String>,
-    ): ResponseEntity<PaymentInstrumentDetailsResponse> {
+    ): ResponseEntity<Any> {
         println("GET call for id $paymentInstrumentId")
+
+        //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("[{\"errors\":[{\"status\":400,\"title\":\"CardDataDecryptionError\",\"code\":\"pi_006_011\",\"message\":\"Token TTL has passed for sessionId e1e40c90-aa47-432d-a4d6-6cffb8fe5312 and globalEntityId FO_NO\"}]}]")
 
         return ResponseEntity.ok()
             .body(
-                if (paymentInstrumentId.startsWith("paytrail", true)) {
+                if(paymentInstrumentId.startsWith("dummy", true)) {
                     PaymentInstrumentDetailsResponse(
                         data = PaymentInstrumentDetailsResponseData(
                             id = paymentInstrumentId,
+                            externalId = UUID.randomUUID().toString(),
+                            globalEntityId = "fo_no",
+                            isPermanent = false,
+                            paymentMethodName = "dummy_payment_method",
+                            details = PaymentInstrumentResponseDetails(
+                                owner = "Test User",
+                                issuerCountry = "NO",
+                                paymentProvider = "dummy_provider",
+                            ),
+                            tokens = listOf(
+                                PaymentInstrumentResponseTokenDetails(
+                                    id = UUID.randomUUID().toString(),
+                                    token = "Z5QlbF9SL64JI4DfXs3Ug6XaxSl",
+                                    expireAt = Instant.parse("2024-02-28T13:40:24.2071905Z"),
+                                    status = TokenStatus.TOKENIZATION_REQUIRED,
+                                    paymentProvider = "dummy_provider",
+                                ),
+                            )
+                        ),
+                    )
+                } else if (paymentInstrumentId.startsWith("paytrail", true)) {
+                    PaymentInstrumentDetailsResponse(
+                        data = PaymentInstrumentDetailsResponseData(
+                            id = paymentInstrumentId,
+                            //externalId = UUID.randomUUID().toString(),
                             globalEntityId = "po_fi",
                             isPermanent = false,
                             paymentMethodName = "onlinebanking",
@@ -91,6 +119,28 @@ class PaymentController {
                         ),
                     )
 
+                } else if (paymentInstrumentId.startsWith("wallet", true)) {
+                    PaymentInstrumentDetailsResponse(
+                        data = PaymentInstrumentDetailsResponseData(
+                            id = paymentInstrumentId,
+                            externalId = "Wallet" + UUID.randomUUID().toString(),
+                            globalEntityId = "np_hu",
+                            isPermanent = false,
+                            paymentMethodName = "wallet",
+                            details = PaymentInstrumentResponseDetails(
+                                owner = "Test User",
+                                bin = "464646",
+                                last4 = "4644",
+                                issuerCountry = "FI",
+                                type = "Tokenized",
+                                alias = "sdsd",
+                                expireAt = "03/2030",
+                                scheme = "Visa",
+                                channelName = "nordea",
+                                paymentProvider = "dh_fintech",
+                            ),
+                        ),
+                    )
                 } else if (paymentInstrumentId.startsWith("kh", true)) {
                     PaymentInstrumentDetailsResponse(
                         data = PaymentInstrumentDetailsResponseData(
